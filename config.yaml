@@ -1,7 +1,8 @@
-environment: development
+environment: dev
 app_name: hackathon-starter
+app_url: "https://1devops.io"
 images_registry: "ghcr.io"
 images_namespace: "googlesky"
 images_tag: "latest"
-mongo_uri: "mongodb://mongodb:27017/hackathon"
+app_config: .env
 kubernetes_namespace: "hackathon-starter"

@@ -1,5 +1,5 @@
 # -- Same as nameOverride but for the namespace.
-namespaceOverride: ""
+namespaceOverride: "{kubernetes_namespace}-{environment}"
 
 # -- Same as nameOverride but for the component.
 componentOverride: ""
@@ -10,7 +10,7 @@ partOfOverride: ""
 ##########################################################
 # Name of the application.
 ##########################################################
-applicationName: "application"
+applicationName: "{app_name}"
 
 ##########################################################
 # Global labels
@@ -221,8 +221,8 @@ deployment:
 
   # Image of the app container
   image:
-    repository: repository/image-name
-    tag: ''
+    repository: {images_registry}/{images_namespace}/{app_name}
+    tag: '{images_tag}'
     digest: '' # if set to a non empty value, digest takes precedence on the tag
     pullPolicy: IfNotPresent
   dnsConfig:
@@ -305,8 +305,8 @@ deployment:
 
   # List of ports for the primary container
   ports:
-  #- containerPort: 8080
-  #  name: http
+  - containerPort: 8080
+    name: http
   #  protocol: TCP
   #- containerPort: 8778
   #  name: jolokia
@@ -387,14 +387,14 @@ service:
 # Ingress object for exposing services
 ##########################################################
 ingress:
-  enabled: false
+  enabled: true
 
   # Name of the ingress class
   ingressClassName: ''
 
   # List of host addresses to be exposed by this Ingress
   hosts:
-    - host: chart-example.local
+    - host: {app_url}
       paths:
       - path: /
       #  pathType: ''
@@ -592,6 +592,9 @@ secret:
   annotations:
     # key: value
   files:
+    .env:
+      data:
+        {app_config}
 #  nameSuffix of Secret
 #   credentials:
 #     data:
