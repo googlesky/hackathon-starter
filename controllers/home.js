@@ -7,3 +7,14 @@ exports.index = (req, res) => {
     title: 'Home'
   });
 };
+
+/** 
+ * GET /blogs
+ * Blogs page.
+ */
+
+exports.blogs = (req, res) => {
+  res.render('blogs', {
+    title: 'Blogs'
+  });
+}

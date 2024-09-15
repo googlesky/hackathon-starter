@@ -3,6 +3,7 @@
  */
 const path = require('path');
 const express = require('express');
+
 const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -18,6 +19,8 @@ const multer = require('multer');
 const rateLimit = require('express-rate-limit');
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
+
+const blogRoutes = require('./routes/blogRoutes');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -189,6 +192,9 @@ app.get('/api/google/drive', passportConfig.isAuthenticated, passportConfig.isAu
 app.get('/api/chart', apiController.getChart);
 app.get('/api/google/sheets', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getGoogleSheets);
 app.get('/api/quickbooks', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getQuickbooks);
+
+// Use the blog routes
+app.use('/api', blogRoutes);
 
 /**
  * OAuth authentication routes. (Sign in)

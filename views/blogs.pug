@@ -1,0 +1,50 @@
+// views/blogs.pug
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Blog Management
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+  body
+    .container
+      h1 Blog Management
+
+      // Blog Creation Form
+      div
+        h3 Create New Blog
+        form(action="/blogs" method="POST")
+          .form-group
+            label(for="title") Title
+            input.form-control(type="text" name="title" id="title" required)
+          .form-group
+            label(for="author") Author
+            input.form-control(type="text" name="author" id="author" required)
+          .form-group
+            label(for="content") Content
+            textarea.form-control(name="content" id="content" required)
+          button.btn.btn-primary(type="submit") Create Blog
+
+      // Blog List
+      div
+        h3 Blog List
+        ul.list-group
+          each blog in blogs
+            li.list-group-item
+              h4= blog.title
+              p= blog.content
+              p
+                small By: #{blog.author}
+
+              // Edit Blog Form
+              form(action="/blogs/update" method="POST" class="form-inline")
+                input(type="hidden" name="id" value=blog._id)
+                input.form-control.mr-2(type="text" name="title" value=blog.title)
+                input.form-control.mr-2(type="text" name="author" value=blog.author)
+                textarea.form-control.mr-2(name="content")= blog.content
+                button.btn.btn-info(type="submit") Update
+
+              // Delete Blog Form
+              form(action="/blogs/delete" method="POST" style="margin-top: 10px;")
+                input(type="hidden" name="id" value=blog._id)
+                button.btn.btn-danger(type="submit") Delete
