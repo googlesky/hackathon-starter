@@ -1,5 +1,15 @@
 # Documentation
 
+## Techniques inside the projects
+
+- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- **Express.js**: A minimal and flexible Node.js web application framework.
+- **K3s**: A lightweight Kubernetes distribution designed for edge computing.
+- **Containerd**: An industry-standard core container runtime.
+- **nerdctl**: A Docker-compatible CLI for containerd.
+- **GitHub Actions**: A CI/CD tool that automates software workflows.
+- **Helm**: A package manager for Kubernetes.
+
 ## Setup Instructions
 
 ### Development Environment
