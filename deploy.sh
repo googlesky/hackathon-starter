@@ -3,7 +3,7 @@
 # Paths to the files
 VALUES_FILE="values.yaml"
 CONFIG_FILE="config.yaml"
-ENV_FILE=".env"
+ENV_FILE=$(grep "^app_config" $(CONFIG_FILE) | head -n 1 | awk '{print $2}')
 CHART_PATH="./chart"
 
 # Check if config.yaml exists
@@ -40,9 +40,22 @@ replace_placeholder() {
   sed -i "s|{$key}|$escaped_value|g" "$VALUES_FILE"
 }
 
+replace_images_tag_by_commit() {
+  # Get the latest commit SHA from the git repository
+  commit_sha=$(git rev-parse HEAD)
+  if [ -z "$commit_sha" ]; then
+    echo "Error: Unable to retrieve commit SHA!"
+    exit 1
+  fi
+
+  sed -i "s|{commit_sha}|$commit_sha|g" "$VALUES_FILE"
+}
+
 # Initialize variables for kubernetes_namespace and environment
 kubernetes_namespace=""
 environment=""
+
+replace_images_tag_by_commit
 
 # Read key-value pairs from config.yaml
 while IFS=: read -r key value; do

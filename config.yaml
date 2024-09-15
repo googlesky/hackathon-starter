@@ -3,6 +3,6 @@ app_name: hackathon-starter
 app_url: "https://1devops.io"
 images_registry: "ghcr.io"
 images_namespace: "googlesky"
-images_tag: "latest"
+images_tag: "commit_sha"
 app_config: .env
 kubernetes_namespace: "hackathon-starter"
