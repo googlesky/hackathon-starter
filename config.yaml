@@ -1,0 +1,7 @@
+environment: development
+app_name: hackathon-starter
+images_registry: "ghcr.io"
+images_namespace: "googlesky"
+images_tag: "latest"
+mongo_uri: "mongodb://mongodb:27017/hackathon"
+kubernetes_namespace: "hackathon-starter"

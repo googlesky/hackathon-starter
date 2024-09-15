@@ -1,18 +1,16 @@
-FROM node:20-slim
+# Use Node.js as base image
+FROM node:20
 
-WORKDIR /starter
-ENV NODE_ENV development
+# Set working directory
+WORKDIR /app
 
-COPY .env.example /starter/.env.example
-COPY . /starter
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
 
-RUN npm install pm2 -g
-RUN if [ "$NODE_ENV" = "production" ]; then \
-    npm install --omit=dev; \
-    else \
-    npm install; \
-    fi
+# Copy the rest of the application
+COPY . .
 
-CMD ["pm2-runtime","app.js"]
-
+# Expose port and start the server
 EXPOSE 8080
+CMD ["npm", "start"]
