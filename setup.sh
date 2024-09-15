@@ -24,8 +24,8 @@ install_containerd_nerdctl() {
     # Install nerdctl
     echo "Installing nerdctl..."
     sudo apt-get install -y wget
-    wget https://github.com/containerd/nerdctl/releases/download/v1.7.0/nerdctl-1.7.0-linux-amd64.tar.gz
-    sudo tar Cxzvf /usr/local/bin nerdctl-1.7.0-linux-amd64.tar.gz
+    wget https://github.com/containerd/nerdctl/releases/download/v1.7.7/nerdctl-1.7.7-linux-amd64.tar.gz
+    sudo tar Cxzvf /usr/local/bin nerdctl-1.7.7-linux-amd64.tar.gz
 
     # Verify installation
     if command_exists nerdctl && command_exists containerd; then
